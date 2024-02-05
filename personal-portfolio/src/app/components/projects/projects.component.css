@@ -1,0 +1,9 @@
+.button-group {
+  display: flex;
+}
+.button {
+  flex: 0.3;
+}
+.button button {
+  font-size: 8px;
+}

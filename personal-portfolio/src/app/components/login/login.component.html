@@ -1,1 +1,64 @@
-<p>login works!</p>
+<section class="section" aria-labelledby="login-label">
+  <form #form="ngForm" (ngSubmit)="login()" ngNativeValidate>
+    <div class="container center">
+      <div class="child">
+        <h2 class="headline-sm text-center">Login</h2>
+
+        <div class="formGroup">
+          <label for="email" class="label">Email Address</label>
+          <input
+            type="email"
+            name="email"
+            id="email"
+            placeholder="Email Address *"
+            class="input-field"
+            required
+            [(ngModel)]="email"
+            (ngModelChange)="onEmailChange()"
+          />
+          <div
+            *ngIf="email && emailValue.dirty && emailValue.errors.valid"
+            style="color: red"
+          >
+            Enter correct Email Id.
+          </div>
+        </div>
+
+        <div class="formGroup">
+          <label for="password" class="label">Password</label>
+          <input
+            type="password"
+            name="password"
+            id="password"
+            placeholder="Password *"
+            class="input-field"
+            required
+            [(ngModel)]="password"
+            minlength="8"
+            (ngModelChange)="onPasswordChange()"
+          />
+          <div
+            *ngIf="
+              password && passwordValue.dirty && passwordValue.errors?.minlength
+            "
+            style="color: red"
+          >
+            Password must be at least 8 characters long.
+          </div>
+        </div>
+
+        <div class="sub-control">
+          <div>
+            <button type="submit" class="btn btnPrimary">Log in</button>
+          </div>
+          <div class="other-links">
+            <span>Or</span>
+            <a routerLink="/forgot-password">Forgot Password?</a>
+            <span> Don't have an account?</span>
+            <a class="redirect" routerLink="/signup">Sign Up</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</section>

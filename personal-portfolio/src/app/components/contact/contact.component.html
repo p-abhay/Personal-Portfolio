@@ -1,1 +1,103 @@
-<p>contact works!</p>
+<section class="section contact has-bg-image" aria-labelledby="contact-label">
+  <div class="container">
+    <form (ngSubmit)="sendEmail($event)" class="contact-form" ngNativeValidate>
+      <h2 class="headline-sm" id="contact-label">Get in touch</h2>
+
+      <p class="contact-text body-md">I would love to hear from you.</p>
+
+      <div class="wrapper">
+        <div>
+          <label for="name" class="label">First name</label>
+
+          <input
+            type="text"
+            name="name"
+            id="name"
+            placeholder="Name *"
+            required
+            class="input-field"
+            maxlength="20"
+          />
+        </div>
+
+        <div>
+          <label for="email" class="label">Your Email </label>
+
+          <input
+            type="email"
+            name="email"
+            id="email"
+            placeholder="Email *"
+            required
+            class="input-field"
+          />
+        </div>
+      </div>
+
+      <label for="subject" class="label">Subject</label>
+      <input
+        type="text"
+        name="subject"
+        id="subject"
+        placeholder="Subject *"
+        class="input-field"
+        required
+        maxlength="30"
+      />
+
+      <label for="message" class="label">Your message </label>
+      <textarea
+        name="message"
+        id="message"
+        placeholder="Your message *"
+        required
+        class="input-field"
+        maxlength="250"
+      ></textarea>
+
+      <button class="btn btn-tertiary">Send Message</button>
+    </form>
+
+    <div class="contact-content">
+      <ul class="contact-list">
+        <li class="contact-item">
+          <div class="item-icon" style="background-color: hsl(177, 39%, 72%)">
+            <ion-icon name="call" aria-hidden="true"></ion-icon>
+          </div>
+
+          <div>
+            <p class="label-lg">Phone</p>
+
+            <a href="tel:+011236548096" class="body-lg">+0 123 456 789</a>
+          </div>
+        </li>
+
+        <li class="contact-item">
+          <div class="item-icon" style="background-color: hsl(41, 99%, 64%)">
+            <ion-icon name="mail" aria-hidden="true"></ion-icon>
+          </div>
+
+          <div>
+            <p class="label-lg">Mail</p>
+
+            <a href="mailto:1903480130001it@gmail.com" class="body-lg"
+              >1903480130001it@gmail.com</a
+            >
+          </div>
+        </li>
+
+        <li class="contact-item">
+          <div class="item-icon" style="background-color: hsl(19, 97%, 85%)">
+            <ion-icon name="location" aria-hidden="true"></ion-icon>
+          </div>
+
+          <div>
+            <p class="label-lg">Visit My Studio</p>
+
+            <address class="body-lg">Kanpur, Uttar Pradesh, India</address>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>

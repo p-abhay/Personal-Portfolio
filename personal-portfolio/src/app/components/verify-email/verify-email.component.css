@@ -1,0 +1,22 @@
+.sub-control {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  /* background-color: blueviolet; */
+}
+.other-links {
+  display: flex;
+  margin-top: 10px;
+  gap: 5px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  /* background-color: rgb(144, 133, 154); */
+}
+.other-links > a {
+  color: blueviolet;
+  font-weight: bold;
+  display: inline-block;
+}
