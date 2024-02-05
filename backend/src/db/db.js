@@ -1,8 +1,8 @@
 // /backend/src/db.js
 const { MongoClient, ServerApiVersion } = require("mongodb");
+require("dotenv").config();
 
-const uri =
-  "mongodb+srv://abhay:abhay24@personal-portfolio.gtxsaod.mongodb.net/?retryWrites=true&w=majority";
+const uri = process.env.MONGO_URI;
 
 const client = new MongoClient(uri, {
   serverApi: {

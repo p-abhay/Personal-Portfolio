@@ -8,12 +8,20 @@ const { connect, disconnect } = require("./db/db");
 const admin = require("firebase-admin");
 const adminUser = require("./config/admin-user");
 const app = express();
-const port = 3000;
+require("dotenv").config();
+
+const port = process.env.PORT;
 
 // Initialize Firebase Admin SDK with your credentials
-const serviceAccount = require("./config/firebase-private-key.json");
+
+//const serviceAccount = require("./config/firebase-private-key.json");
+//console.log(typeof serviceAccount);
 admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount),
+  credential: admin.credential.cert({
+    projectId: process.env.FIREBASE_PROJECT_ID,
+    clientEmail: process.env.FIREBASE_CLIENT_EMAIL,
+    privateKey: process.env.FIREBASE_PRIVATE_KEY?.replace(/\\n/g, "\n"),
+  }),
 });
 
 // Admin user creation logic
