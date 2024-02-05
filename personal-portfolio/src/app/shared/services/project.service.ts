@@ -6,7 +6,8 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class ProjectService {
-  private apiUrl = 'http://localhost:3000/api/projects'; // Update with your backend URL
+  private apiUrl =
+    'https://abhay-personal-portfolio-backend.onrender.com/api/projects';
 
   constructor(private http: HttpClient) {}
 

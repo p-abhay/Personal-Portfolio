@@ -6,7 +6,8 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class ExperienceService {
-  private apiUrl = 'http://localhost:3000/api/experiences'; // Update with your backend URL
+  private apiUrl =
+    'https://abhay-personal-portfolio-backend.onrender.com/api/experiences';
 
   constructor(private http: HttpClient) {}
 
