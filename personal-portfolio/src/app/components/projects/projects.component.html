@@ -1,1 +1,355 @@
-<p>projects works!</p>
+<main>
+  <article>
+    <section class="section portfolio" aria-labelledby="portfolio-label">
+      <div class="container">
+        <button
+          class="btn btn-primary"
+          (click)="toggleAddForm()"
+          *ngIf="authService.isLoggedIn"
+        >
+          {{ addEditButtonText }}
+        </button>
+        <br />
+
+        <div *ngIf="showAddForm" #portfolioForm>
+          <!-- Form for adding a new project with image upload -->
+          <form
+            (ngSubmit)="addProject()"
+            #experienceForm="ngForm"
+            ngNativeValidate
+          >
+            <div class="form-group">
+              <label for="newImage">Upload Image</label>
+              <input
+                class="input-field"
+                type="file"
+                id="newImage"
+                name="newImage"
+                required
+                placeholder="Image of the Project *"
+                (change)="handleImageUpload($event)"
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="newTitle">Title</label>
+              <input
+                class="input-field"
+                type="text"
+                name="newTitle"
+                id="newTitle"
+                [(ngModel)]="newProject.title"
+                maxlength="20"
+                placeholder="Title (Max Length 20 characters) *"
+                required
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="newCategory">Category</label>
+              <input
+                class="input-field"
+                type="text"
+                name="newCategory"
+                id="newCategory"
+                maxlength="10"
+                required
+                placeholder="Category (Max Length 10 characters) *"
+                [(ngModel)]="newProject.category"
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="newDescription">Description</label>
+              <textarea
+                class="input-field"
+                id="newDescription"
+                name="newDescription"
+                maxlength="250"
+                required
+                placeholder="Description (Max Length 250 characters) *"
+                [(ngModel)]="newProject.description"
+              ></textarea>
+            </div>
+
+            <div class="form-group">
+              <label for="newLink">Link</label>
+              <input
+                class="input-field"
+                type="text"
+                name="newLink"
+                id="newLink"
+                placeholder="Link to Repository or deployment (Optional)"
+                [(ngModel)]="newProject.link"
+              />
+            </div>
+
+            <!-- Submit button -->
+            <button class="btn btn-primary">Submit</button>
+          </form>
+        </div>
+      </div>
+      <div class="container">
+        <h2 class="section-title headline-md text-center" id="portfolio-label">
+          Latest Projects
+        </h2>
+        <ul class="protfolio-list" *ngIf="loading">
+          <ion-progress-bar type="indeterminate"></ion-progress-bar>
+        </ul>
+        <ul class="portfolio-list" *ngIf="!loading">
+          <li *ngFor="let project of projects; let i = index">
+            <div class="portfolio-card">
+              <div
+                class="card-banner img-holder"
+                [style.width.px]="800"
+                [style.height.px]="540"
+              >
+                <img
+                  src="{{ project.image }}"
+                  width="800"
+                  height="540"
+                  loading="lazy"
+                  [alt]="project.title"
+                  class="img-cover"
+                />
+                <a
+                  href="{{ project.link }}"
+                  class="btn-icon"
+                  aria-label="More about {{ project.title }}"
+                >
+                  <ion-icon
+                    name="arrow-forward-sharp"
+                    aria-hidden="true"
+                  ></ion-icon>
+                </a>
+              </div>
+
+              <div class="card-content">
+                <span class="chip label-md">{{ project.category }}</span>
+                <h3 class="title-md">{{ project.title }}</h3>
+                <p class="card-text">{{ project.description }}</p>
+
+                <a
+                  href="{{ project.link }}"
+                  target="_blank"
+                  class="btn btn-primary"
+                  >View Project</a
+                >
+                <!-- Edit and delete buttons -->
+                <br />
+                <div class="button-group" *ngIf="authService.isLoggedIn">
+                  <div class="button">
+                    <button class="btn btn-secondary" (click)="editProject(i)">
+                      Edit
+                    </button>
+                  </div>
+
+                  <div class="button">
+                    <button class="btn btn-danger" (click)="deleteProject(i)">
+                      Delete
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </section>
+  </article>
+</main>
+
+<!-- <main>
+  <article>
+   
+    <section class="section portfolio" aria-labelledby="portfolio-label">
+      <div class="container">
+        <h2 class="section-title headline-md text-center" id="portfolio-label">
+          Latest Projects
+        </h2>
+
+        <ul class="portfolio-list">
+          <li>
+            <div class="portfolio-card">
+              <div
+                class="card-banner img-holder"
+                style="--width: 800; --height: 540"
+              >
+                <img
+                  src="./assets/images/portfolio-1.jpg"
+                  width="800"
+                  height="540"
+                  loading="lazy"
+                  alt="Website Design for Marketing Agency Startup"
+                  class="img-cover"
+                />
+
+                <a
+                  href="#"
+                  class="btn-icon"
+                  aria-label="More about Website Design for Marketing Agency Startup"
+                >
+                  <ion-icon
+                    name="arrow-forward-sharp"
+                    aria-hidden="true"
+                  ></ion-icon>
+                </a>
+              </div>
+
+              <div class="card-content">
+                <span class="chip label-md">Web Design</span>
+
+                <h3 class="title-md">
+                  Website Design for Marketing Agency Startup
+                </h3>
+
+                <p class="card-text">
+                  I design and develop services for customers of all sizes,
+                  specializing in creating stylish, modern websites, web
+                  services and online stores
+                </p>
+
+                <a href="#" class="btn btn-primary">View Project</a>
+              </div>
+            </div>
+          </li>
+
+          <li>
+            <div class="portfolio-card">
+              <div
+                class="card-banner img-holder"
+                style="--width: 800; --height: 540"
+              >
+                <img
+                  src="./assets/images/portfolio-2.jpg"
+                  width="800"
+                  height="540"
+                  loading="lazy"
+                  alt="Website Design for Marketing Agency Startup"
+                  class="img-cover"
+                />
+
+                <a
+                  href="#"
+                  class="btn-icon"
+                  aria-label="More about Website Design for Marketing Agency Startup"
+                >
+                  <ion-icon
+                    name="arrow-forward-sharp"
+                    aria-hidden="true"
+                  ></ion-icon>
+                </a>
+              </div>
+
+              <div class="card-content">
+                <span class="chip label-md">Web Design</span>
+
+                <h3 class="title-md">
+                  Website Design for Marketing Agency Startup
+                </h3>
+
+                <p class="card-text">
+                  I design and develop services for customers of all sizes,
+                  specializing in creating stylish, modern websites, web
+                  services and online stores
+                </p>
+
+                <a href="#" class="btn btn-primary">View Project</a>
+              </div>
+            </div>
+          </li>
+
+          <li>
+            <div class="portfolio-card">
+              <div
+                class="card-banner img-holder"
+                style="--width: 800; --height: 540"
+              >
+                <img
+                  src="./assets/images/portfolio-3.jpg"
+                  width="800"
+                  height="540"
+                  loading="lazy"
+                  alt="Website Design for Marketing Agency Startup"
+                  class="img-cover"
+                />
+
+                <a
+                  href="#"
+                  class="btn-icon"
+                  aria-label="More about Website Design for Marketing Agency Startup"
+                >
+                  <ion-icon
+                    name="arrow-forward-sharp"
+                    aria-hidden="true"
+                  ></ion-icon>
+                </a>
+              </div>
+
+              <div class="card-content">
+                <span class="chip label-md">Web Design</span>
+
+                <h3 class="title-md">
+                  Website Design for Marketing Agency Startup
+                </h3>
+
+                <p class="card-text">
+                  I design and develop services for customers of all sizes,
+                  specializing in creating stylish, modern websites, web
+                  services and online stores
+                </p>
+
+                <a href="#" class="btn btn-primary">View Project</a>
+              </div>
+            </div>
+          </li>
+
+          <li>
+            <div class="portfolio-card">
+              <div
+                class="card-banner img-holder"
+                style="--width: 800; --height: 540"
+              >
+                <img
+                  src="./assets/images/portfolio-4.jpg"
+                  width="800"
+                  height="540"
+                  loading="lazy"
+                  alt="Website Design for Marketing Agency Startup"
+                  class="img-cover"
+                />
+
+                <a
+                  href="#"
+                  class="btn-icon"
+                  aria-label="More about Website Design for Marketing Agency Startup"
+                >
+                  <ion-icon
+                    name="arrow-forward-sharp"
+                    aria-hidden="true"
+                  ></ion-icon>
+                </a>
+              </div>
+
+              <div class="card-content">
+                <span class="chip label-md">Web Design</span>
+
+                <h3 class="title-md">
+                  Website Design for Marketing Agency Startup
+                </h3>
+
+                <p class="card-text">
+                  I design and develop services for customers of all sizes,
+                  specializing in creating stylish, modern websites, web
+                  services and online stores
+                </p>
+
+                <a href="#" class="btn btn-primary">View Project</a>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </section>
+  </article>
+</main> -->

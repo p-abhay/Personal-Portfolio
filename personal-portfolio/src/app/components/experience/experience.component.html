@@ -1,0 +1,114 @@
+<!-- 
+      - #EXPERIENCE
+    -->
+
+<section class="section experience" aria-labelledby="experience-label">
+  <div class="container">
+    <h2 class="section-title headline-md" id="experience-label">Experience</h2>
+    <button
+      class="btn btn-primary"
+      (click)="toggleAddForm()"
+      *ngIf="authService.isLoggedIn"
+    >
+      {{ addEditButtonText }}
+    </button>
+    <br />
+    <div *ngIf="showAddForm" #experienceForm>
+      <!-- Form for adding a new experience -->
+      <form
+        (ngSubmit)="addExperience()"
+        #experienceForm="ngForm"
+        ngNativeValidate
+      >
+        <label for="title">Title:</label>
+        <input
+          class="input-field"
+          type="text"
+          id="title"
+          name="title"
+          [(ngModel)]="newExperience.title"
+          required
+          maxlength="20"
+          placeholder="Title (Max Length 20 characters) *"
+        />
+
+        <label for="startDate">Start Date:</label>
+        <input
+          class="input-field"
+          type="text"
+          id="startDate"
+          name="startDate"
+          maxlength="15"
+          placeholder="Start Date(Max Length 15 characters) *"
+          [(ngModel)]="newExperience.startDate"
+          required
+        />
+
+        <label for="endDate">End Date:</label>
+        <input
+          class="input-field"
+          type="text"
+          id="endDate"
+          name="endDate"
+          maxlength="15"
+          placeholder="End Date (Max Length 15 characters) *"
+          [(ngModel)]="newExperience.endDate"
+          required
+        />
+
+        <label for="skills">Skills:</label>
+        <input
+          class="input-field"
+          type="text"
+          id="skills"
+          name="skills"
+          maxlength="40"
+          placeholder="Skills (Separate by ','. Max Length 40 characters) *"
+          [(ngModel)]="newExperience.skills"
+          required
+        />
+
+        <label for="description">Description:</label>
+        <textarea
+          class="input-field"
+          id="description"
+          name="description"
+          maxlength="250"
+          placeholder="Description (Max Length 250 characters) *"
+          [(ngModel)]="newExperience.description"
+          required
+        ></textarea>
+
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+    </div>
+    <br />
+    <ul class="protfolio-list" *ngIf="loading">
+      <ion-progress-bar type="indeterminate"></ion-progress-bar>
+    </ul>
+    <ul class="experience-list" *ngIf="!loading">
+      <li
+        *ngFor="let experience of experiences; let i = index"
+        class="experience-item"
+      >
+        <h3 class="title-md">{{ experience.title }}</h3>
+        <p class="body-sm">
+          Duration: {{ experience.startDate }} - {{ experience.endDate }}
+        </p>
+        <p class="body-sm">Skills: {{ experience.skills }}</p>
+        <p class="body-md">{{ experience.description }}</p>
+        <div class="modify" *ngIf="authService.isLoggedIn">
+          <button class="btn btn-primary" (click)="editExperience(i)">
+            Edit
+          </button>
+          <br />
+          <button class="btn btn-primary" (click)="deleteExperience(i)">
+            Delete
+          </button>
+        </div>
+        <br />
+        <hr />
+      </li>
+    </ul>
+  </div>
+</section>

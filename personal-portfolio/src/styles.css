@@ -1,1 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
+body {
+  background-image: url("C:/Users/abhaysankhwar/Downloads/photo-1518655048521-f130df041f66.png");
+  background-size: cover;
+}

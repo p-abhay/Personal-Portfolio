@@ -1,0 +1,7 @@
+.modify {
+  display: flex;
+}
+.modify button {
+  font-size: 8px;
+  background-color: rgb(23, 170, 190);
+}

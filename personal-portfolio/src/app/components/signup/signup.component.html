@@ -1,1 +1,99 @@
-<p>signup works!</p>
+<section class="section" aria-labelledby="signup-label">
+  <form #form="ngForm" (ngSubmit)="signUp()" ngNativeValidate>
+    <div class="container center">
+      <div class="child">
+        <h2 class="headline-sm text-center">Sign Up</h2>
+
+        <div class="formGroup">
+          <label for="email" class="label">Email Address</label>
+          <input
+            type="email"
+            name="email"
+            id="email"
+            placeholder="Email Address *"
+            class="input-field"
+            required
+            [(ngModel)]="email"
+            (ngModelChange)="onEmailChange()"
+          />
+          <div
+            *ngIf="email && emailValue.dirty && emailValue.errors.valid"
+            style="color: red"
+          >
+            Enter correct Email Id.
+          </div>
+        </div>
+
+        <div class="formGroup">
+          <label for="password" class="label">Password</label>
+          <input
+            type="password"
+            name="password"
+            id="password"
+            placeholder="Password *"
+            class="input-field"
+            required
+            [(ngModel)]="password"
+            (ngModelChange)="onPasswordChange()"
+            minlength="8"
+          />
+          <div
+            *ngIf="
+              password && passwordValue.dirty && passwordValue.errors?.minlength
+            "
+            style="color: red"
+          >
+            Password must be at least 8 characters long.
+          </div>
+        </div>
+
+        <div class="formGroup">
+          <label for="confirmPassword" class="label">Confirm Password</label>
+          <input
+            type="password"
+            name="confirmPassword"
+            id="confirmPassword"
+            placeholder="Confirm Password *"
+            class="input-field"
+            required
+            [(ngModel)]="confirmPassword"
+            (ngModelChange)="onConfirmPasswordChange()"
+            minlength="8"
+          />
+          <div
+            *ngIf="
+              confirmPassword &&
+              confirmPasswordValue.dirty &&
+              confirmPasswordValue.errors?.minlength
+            "
+            style="color: red"
+          >
+            Password must be at least 8 characters long.
+          </div>
+          <div
+            *ngIf="
+              confirmPassword &&
+              confirmPasswordValue.dirty &&
+              !confirmPasswordValue.errors?.equal
+            "
+            style="color: red"
+          >
+            Password does not match.
+          </div>
+        </div>
+
+        <div class="sub-control">
+          <div>
+            <button type="submit" class="btn btnPrimary">Sign Up</button>
+          </div>
+
+          <div class="other-links">
+            <span>Or</span>
+            <span> Already have an account? </span>
+            <a routerLink="/login">Log In</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</section>

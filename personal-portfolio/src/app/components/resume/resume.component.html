@@ -1,1 +1,35 @@
-<p>resume works!</p>
+<section class="section login has-bg-image" aria-labelledby="login-label">
+  <div class="container">
+    <!-- Add an ngIf directive to conditionally render the iframe or error message -->
+    <div *ngIf="!showError; else errorBlock" class="authBlock">
+      <!-- Add (load) event to handle successful iframe load -->
+      <iframe
+        src="https://drive.google.com/file/d/1XmZUZYvrYLyC4hquo2z_PIAC8Fx922hG/preview"
+        width="100%"
+        height="600"
+        frameborder="0"
+        allowfullscreen="true"
+        mozallowfullscreen="true"
+        webkitallowfullscreen="true"
+        (load)="handleError()"
+      ></iframe>
+    </div>
+    <!-- Add a download button -->
+    <div class="formGroup">
+      <button
+        type="button"
+        class="btn btnPrimary"
+        (click)="downloadPDF('1XmZUZYvrYLyC4hquo2z_PIAC8Fx922hG')"
+      >
+        Download
+      </button>
+    </div>
+
+    <!-- Add an error block to display the error message -->
+    <ng-template #errorBlock>
+      <div class="error-message">
+        {{ errorMessage }}
+      </div>
+    </ng-template>
+  </div>
+</section>
