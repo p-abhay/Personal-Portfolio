@@ -1,8 +1,8 @@
 <section class="section login has-bg-image" aria-labelledby="login-label">
   <div class="container">
-    <!-- Add an ngIf directive to conditionally render the iframe or error message -->
+    <!-- ngIf directive to conditionally render the iframe or error message -->
     <div *ngIf="!showError; else errorBlock" class="authBlock">
-      <!-- Add (load) event to handle successful iframe load -->
+      <!-- (load) event to handle successful iframe load -->
       <iframe
         src="https://drive.google.com/file/d/1XmZUZYvrYLyC4hquo2z_PIAC8Fx922hG/preview"
         width="100%"
@@ -14,7 +14,7 @@
         (load)="handleError()"
       ></iframe>
     </div>
-    <!-- Add a download button -->
+    <!-- download button -->
     <div class="formGroup">
       <button
         type="button"
@@ -25,7 +25,7 @@
       </button>
     </div>
 
-    <!-- Add an error block to display the error message -->
+    <!-- error block to display the error message -->
     <ng-template #errorBlock>
       <div class="error-message">
         {{ errorMessage }}
